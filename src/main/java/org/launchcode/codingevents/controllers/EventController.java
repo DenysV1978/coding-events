@@ -37,7 +37,9 @@ public class EventController {
     @PostMapping("create")
     public String createEvent(@RequestParam String eventName) {
         events.add(eventName);
-        return "redirect:"; //this means send to the URL level where this Controller is located. In our case it is /events
+        return "redirect:"; //this means it sends to a method that handles this level of url. In our case it is /events (this is when there is nothing after : . If I
+        //wanted to return it to the method handling (controlling) url events/create, I would type redirect:create. And it would run again method
+        //createEvent...
 
 
     }
