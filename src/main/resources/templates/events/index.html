@@ -8,11 +8,20 @@
 
 <h1>All Events</h1>
 
-<ul>
-    <th:block th:each="event : ${events}">
-        <li th:text="${event}"></li>
-    </th:block>
-</ul>
+<table>
+    <tr>
+        <th>Name of event</th>
+        <th>Description</th>
+        <th>Delmar Bulvard, LaunchCode</th>
+    </tr>
+    <tr th:block th:each="event : ${events}">
+            <td th:text="${event.getKey()}"></td>
+            <td th:text="${event.getValue()}"></td>
+            <td th:replace="fragments::address"></td>
+    </tr>
+</table>
+
+<nav th:replace="fragments::navigation"></nav>
 
 </body>
 </html>
