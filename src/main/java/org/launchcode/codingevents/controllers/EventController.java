@@ -1,5 +1,6 @@
 package org.launchcode.codingevents.controllers;
 
+import org.launchcode.codingevents.models.Event;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,7 +18,7 @@ import java.util.List;
 @RequestMapping("events")
 public class EventController {
 
-    private static List<String> events = new ArrayList<>();
+    private static List<Event> events = new ArrayList<>();
 
     @GetMapping()
     public String displayAllEvents(Model model) {
@@ -35,8 +36,9 @@ public class EventController {
 
     //lives at /events/create
     @PostMapping("create")
-    public String createEvent(@RequestParam String eventName) {
-        events.add(eventName);
+    public String createEvent(@RequestParam String eventName, @RequestParam String eventDescription) {
+        events.add(new Event(eventName, eventDescription)); // this basically means that we push object in the List instead of just Strings. So,
+        //every time we have new event thrown from TH we create new object Event and push it in List events!!!
         return "redirect:"; //this means it sends to a method that handles this level of url. In our case it is /events (this is when there is nothing after : . If I
         //wanted to return it to the method handling (controlling) url events/create, I would type redirect:create. And it would run again method
         //createEvent...
