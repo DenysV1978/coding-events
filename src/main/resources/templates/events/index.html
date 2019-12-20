@@ -21,10 +21,14 @@
             <td th:text="${event.name}"></td> <!-- this notation .name will ignite the getter for the name - implicitly. It is called
             syntactic sugar - easy to use. By the way our name is private; so, getter will be ignited-->
             <td th:text="${event.description}"></td>
+            <td>
+                <a th:href="@{/events/edit/{id}(id=${event.id})}">Edit</a> <!--this is the link that will send on url events/edit/id number of item chosen at html-->
+
+            </td>
         </tr>
 </table>
 
-<nav th:replace="fragments::navigation">
+<nav th:replace="fragments::navigation"></nav>
 
 </body>
 </html>
