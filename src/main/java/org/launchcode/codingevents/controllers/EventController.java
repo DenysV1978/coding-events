@@ -46,6 +46,8 @@ public class EventController {
 
     }
 
+    //the next two controller responsible for deletion
+
     @GetMapping("delete") //this guy will send info to th: html. Will be triggered by url .../delete
     public String displayDeleteEventForm(Model model) {
 
@@ -68,7 +70,13 @@ public class EventController {
         return "redirect:";
     }
 
-    @GetMapping(value = "edit/{eventId}")
+    //the next two are responsible for edition
+
+    //this guy is triggered by simple submission button at <a th:href="@{/events/edit/{id}(id=${event.id})}">Edit</a> at events/index
+    //this button is located against each event. So, when the user hits specific button edit, it returns url  events/edit/id, which always triggers
+    //this controller, because this controller has flexible route!!! BTW this is why we have @PathVariable - it gives variable that could be
+    //sent to url route for this controller!
+    @GetMapping(value = "edit/{eventId}") //so, this get mapping catches flexible URL that depends on eventId variable..
     public String displayEditForm(Model model, @PathVariable int eventId) {
         model.addAttribute("event", EventData.getById(eventId));
         model.addAttribute("title", "Edit event with Name:"+EventData.getById(eventId).getName()+", ID: "+EventData.getById(eventId).getId()+".");
@@ -76,7 +84,7 @@ public class EventController {
         return "events/edit";
     }
 
-    @PostMapping("edit")
+    @PostMapping("edit") //this guy will re-save name and description under the same ID... it will edit event
     public String processEditForm(int eventId, String name, String description) {
         EventData.getById(eventId).setName(name);
         EventData.getById(eventId).setDescription(description);
