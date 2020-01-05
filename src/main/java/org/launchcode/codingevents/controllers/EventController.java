@@ -4,8 +4,10 @@ import org.launchcode.codingevents.data.EventData;
 import org.launchcode.codingevents.models.Event;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -28,15 +30,23 @@ public class EventController {
 
     //lives at /events/create
     @GetMapping("create")
-    public String renderCreateEventForm() {
+    public String renderCreateEventForm(Model model) {
+        model.addAttribute("title", "Create event");
+        model.addAttribute("event", new Event()); // we could do model.addAttribute(new Event()); - in this case TH
+        //would create label "event"
         return "events/create";
 
     }
 
     //lives at /events/create
     @PostMapping("create")
-    public String createEvent(@ModelAttribute Event newEvent) { //so, this idea is about that @ModelAttribute will find necessary parameters for
+    public String createEvent(@ModelAttribute @Valid Event newEvent, Errors errors, Model model) { //so, this idea is about that @ModelAttribute will find necessary parameters for
         //creating new Event newEvent and create this newEvent and after push it in EventData list. Do not forget that variables in html in this case should have the same names as variables in Event class
+        if(errors.hasErrors()) {
+            model.addAttribute("title", "Create Event");
+//
+            return "events/create";
+        }
         EventData.add(newEvent); // this basically means that we push object in the List instead of just Strings. So,
         //every time we have new event thrown from TH we create new object Event and push it in List events!!!
         return "redirect:"; //this means it sends to a method that handles this level of url. In our case it is /events (this is when there is nothing after : . If I
