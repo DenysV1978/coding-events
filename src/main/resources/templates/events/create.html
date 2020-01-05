@@ -42,6 +42,20 @@
         <p class="error" th:errors="${event.mustRegister}"></p>
     </div>
     <div class="form-group">
+        <label>Type
+            <select th:field="${event.type}">
+                <option th:each="type : ${types}"
+                        th:value="${type}"
+                        th:text="${type.displayName}">
+<!--                        th:value is what will be submitted to the server and th:text is what will be shown to a user-->
+
+
+                </option>
+            </select>
+        </label>
+
+    </div>
+    <div class="form-group">
         <input type="submit" value="Create Event" class="btn btn-success">
     </div>
 </form>

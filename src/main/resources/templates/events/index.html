@@ -23,6 +23,9 @@
             syntactic sugar - easy to use. By the way our name is private; so, getter will be ignited-->
             <td th:text="${event.description}"></td>
             <td th:text="${event.contactEmail}"></td>
+            <td th:text="${event.mustRegister}"></td>
+            <td th:text="${event.quantityOfAttendees}"></td>
+            <td th:text="${event.type}"></td>
             <td>
                 <a th:href="@{/events/edit/{id}(id=${event.id})}">Edit</a> <!--this is the link that will send on url events/edit/id number of item chosen at html-->
 

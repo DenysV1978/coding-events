@@ -2,6 +2,7 @@ package org.launchcode.codingevents.controllers;
 
 import org.launchcode.codingevents.data.EventData;
 import org.launchcode.codingevents.models.Event;
+import org.launchcode.codingevents.models.EventType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
@@ -34,6 +35,7 @@ public class EventController {
         model.addAttribute("title", "Create event");
         model.addAttribute("event", new Event()); // we could do model.addAttribute(new Event()); - in this case TH
         //would create label "event"
+        model.addAttribute("types", EventType.values());
         return "events/create";
 
     }
