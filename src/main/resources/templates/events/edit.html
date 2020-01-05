@@ -15,6 +15,26 @@
         </label>
     </div>
     <div class="form-group">
+        <label>Contact email
+            <input type="text" name="contactEmail" th:value="${event.contactEmail}" class="form-control">
+        </label>
+    </div>
+    <div class="form-group">
+        <label>Must register
+            <input type="text" name="mustRegister" th:value="${event.mustRegister}" class="form-control">
+        </label>
+    </div>
+    <div class="form-group">
+        <label>Quantity of attendees
+            <input type="text" name="quantityOfAttendees" th:value="${event.quantityOfAttendees}" class="form-control">
+        </label>
+    </div>
+    <div class="form-group">
+        <label>Type
+            <input type="text" name="type" th:value="${event.type}" class="form-control">
+        </label>
+    </div>
+    <div class="form-group">
         <input type="submit" value="Edit Event" class="btn btn-success">
         <input type="hidden" th:value="${event.id}" name="eventId" /> <!--this is hidden variable that basically return back
         itself... the idea is just to send back to controller three variables: edited name, edited description, but the same idea -->

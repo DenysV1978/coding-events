@@ -15,6 +15,9 @@
             <th>Name</th>
             <th>Description</th>
             <th>Contact email</th>
+            <th>Must register</th>
+            <th>Quantity of attendees</th>
+            <th>Type</th>
         </tr>
     </thead>
         <tr th:each="event : ${events}">
@@ -25,7 +28,7 @@
             <td th:text="${event.contactEmail}"></td>
             <td th:text="${event.mustRegister}"></td>
             <td th:text="${event.quantityOfAttendees}"></td>
-            <td th:text="${event.type}"></td>
+            <td th:text="${event.type.displayName}"></td>
             <td>
                 <a th:href="@{/events/edit/{id}(id=${event.id})}">Edit</a> <!--this is the link that will send on url events/edit/id number of item chosen at html-->
 
