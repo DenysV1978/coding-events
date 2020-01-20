@@ -46,7 +46,7 @@
             <select th:field="${event.type}">
                 <option th:each="type : ${types}"
                         th:value="${type}"
-                        th:text="${type.displayName}">
+                        th:text="${type.name}">
 <!--                        th:value is what will be submitted to the server and th:text is what will be shown to a user-->
 
 

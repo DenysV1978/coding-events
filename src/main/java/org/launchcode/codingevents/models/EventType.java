@@ -7,13 +7,13 @@ public enum EventType {
     WORKSHOP("Workshop"),
     SOCIAL("Social");
 
-    private final String displayName;
+    private final String name;
 
-    EventType(String displayName) {
-        this.displayName = displayName;
+    EventType(String name) {
+        this.name = name;
     }
 
-    public String getDisplayName() {
-        return displayName;
+    public String getName() {
+        return this.name;
     }
 }

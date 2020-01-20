@@ -1,12 +1,20 @@
 package org.launchcode.codingevents.models;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 import javax.validation.constraints.*;
 import java.util.Objects;
 
+@Entity
 public class Event {
 
+    @Id
+    @GeneratedValue
     private int id;
-    private static int nextId = 1; //this ID is static; so, it is shared by all instances of the class!
+
+    //so, now sql will generate unique ids by itslef!!
+    //private static int nextId = 1; //this ID is static; so, it is shared by all instances of the class!
 
     @NotBlank(message = "Name cannot be blank")
     @Size(min = 3, max = 50, message = "Name should be between 3 and 50 characters")
@@ -40,7 +48,7 @@ public class Event {
     // using overwriting method Java will use only that constructor that has enough parameters
 
     public Event(String name, String description, String contactEmail, int quantityOfAttendees, boolean mustRegister, EventType type) {
-        this(); // this guy will call itself (constructor) that does not have any arguments - basically it will create id and change
+        //this(); // this guy will call itself (constructor) that does not have any arguments - basically it will create id and change
         //nextId plus one in the main class (basically it will change nextId which is shared by all instances of this class cause its static  property
 
         this.name = name;
@@ -49,13 +57,14 @@ public class Event {
         this.quantityOfAttendees = quantityOfAttendees;
         this.mustRegister = mustRegister;
         this.type = type;
+        this.location = location;
 
     }
 
     public Event() {
 
-        this.id = nextId;
-        nextId++;
+//        this.id = nextId;
+//        nextId++;
     }
 
     public String getName() {
