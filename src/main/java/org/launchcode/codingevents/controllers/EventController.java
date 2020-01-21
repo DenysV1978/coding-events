@@ -54,7 +54,7 @@ public class EventController {
         //creating new Event newEvent and create this newEvent and after push it in EventData list. Do not forget that variables in html in this case should have the same names as variables in Event class
         if(errors.hasErrors()) {
             model.addAttribute("title", "Create Event");
-            model.addAttribute("type", EventType.values());
+            model.addAttribute("types", EventType.values());
 //
             return "events/create";
         }
@@ -74,7 +74,8 @@ public class EventController {
     public String displayDeleteEventForm(Model model) {
 
         model.addAttribute("title", "Delete Events");
-        model.addAttribute("events", eventRepository.findAll());
+        model.addAttribute("events", eventRepository.findAll()); //this is going to be arrayList!!!
+        System.out.println("stop");
         return "events/delete";
     }
 
@@ -109,10 +110,17 @@ public class EventController {
     }
 
     @PostMapping("edit") //this guy will re-save name and description under the same ID... it will edit event
-    public String processEditForm(int eventId, String name, String description) {
-        eventRepository.findById(eventId);
-        eventRepository.findById(eventId).get().setDescription(description);
-
+    public String processEditForm(@ModelAttribute @Valid Event newEvent, Errors errors, Model model, int eventId) {
+        if(errors.hasErrors()) {
+            model.addAttribute("title", "Create Event");
+            model.addAttribute("type", EventType.values());
+//
+            return "events/create";
+        }
+        //System.out.println("stop");
+        eventRepository.deleteById(eventId);
+        eventRepository.save(newEvent); // this basically means that we push object in the List instead of just Strings. So,
+        //every time we have new event thrown from TH we create new object Event and push it in List events!!!
         return "redirect:";
     }
 
