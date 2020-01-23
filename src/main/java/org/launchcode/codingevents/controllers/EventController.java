@@ -118,9 +118,12 @@ public class EventController {
             return "events/create";
         }
         //System.out.println("stop");
-        eventRepository.deleteById(eventId);
-        eventRepository.save(newEvent); // this basically means that we push object in the List instead of just Strings. So,
-        //every time we have new event thrown from TH we create new object Event and push it in List events!!!
+        Event temp = eventRepository.findById(eventId).get(); // this is a great example how to save in way to UPDATE save(entity)
+        temp.setName(newEvent.getName());
+        //System.out.println("stop");
+
+        //eventRepository.deleteById(eventId);
+        eventRepository.save(temp);
         return "redirect:";
     }
 
