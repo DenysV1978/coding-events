@@ -101,7 +101,7 @@ public class EventController {
     //sent to url route for this controller!
     @GetMapping(value = "edit/{eventId}") //so, this get mapping catches flexible URL that depends on eventId variable..
     public String displayEditForm(Model model, @PathVariable int eventId) {
-        model.addAttribute("event", eventRepository.findById(eventId).get());
+        model.addAttribute("event", eventRepository.findById(eventId).get()); //looks like we have to use get() because findById returns kind of hasmap with key and value, where value is the Object!
        System.out.println("stop");
         model.addAttribute("title", "Edit event with Name:"+eventRepository.findById(eventId).get().getName()+", ID: "+eventRepository.findById(eventId).get().getId()+".");
         System.out.println("stop");

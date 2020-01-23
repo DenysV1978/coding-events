@@ -13,7 +13,7 @@ public class Event {
     @GeneratedValue
     private int id;
 
-    //so, now sql will generate unique ids by itslef!!
+    //so, now sql will generate unique ids by itself!!
     //private static int nextId = 1; //this ID is static; so, it is shared by all instances of the class!
 
     @NotBlank(message = "Name cannot be blank")
