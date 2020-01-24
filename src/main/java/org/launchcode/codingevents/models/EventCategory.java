@@ -5,12 +5,11 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
+import java.util.Objects;
 
 @Entity
-public class EventCategory {
-    @Id
-    @GeneratedValue
-    private int idCategory;
+public class EventCategory extends AbstractEntity {
+
 
     @NotBlank(message = "cannot be blank")
     @Size(min = 3, max = 50, message = "Name should be between 3 and 50 characters")
@@ -30,10 +29,6 @@ public class EventCategory {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public int getIdCategory() {
-        return idCategory;
     }
 
 

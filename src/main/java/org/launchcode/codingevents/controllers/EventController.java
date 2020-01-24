@@ -1,6 +1,7 @@
 package org.launchcode.codingevents.controllers;
 
 
+import org.hibernate.Session;
 import org.launchcode.codingevents.data.EventRepository;
 import org.launchcode.codingevents.models.Event;
 import org.launchcode.codingevents.models.EventType;
@@ -124,6 +125,8 @@ public class EventController {
 
         //eventRepository.deleteById(eventId);
         eventRepository.save(temp);
+
+        
         return "redirect:";
     }
 

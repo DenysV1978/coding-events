@@ -7,14 +7,10 @@ import javax.validation.constraints.*;
 import java.util.Objects;
 
 @Entity
-public class Event {
+public class Event extends AbstractEntity {
 
-    @Id
-    @GeneratedValue
-    private int id;
 
-    //so, now sql will generate unique ids by itself!!
-    //private static int nextId = 1; //this ID is static; so, it is shared by all instances of the class!
+
 
     @NotBlank(message = "Name cannot be blank")
     @Size(min = 3, max = 50, message = "Name should be between 3 and 50 characters")
@@ -83,9 +79,7 @@ public class Event {
         this.description = description;
     }
 
-    public int getId() { //we are not going to create setter for id because we do not want anybody give a chance to change id
-        return id;
-    }
+
 
     public String getContactEmail() {
         return contactEmail;
@@ -132,16 +126,5 @@ public class Event {
         return name;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Event event = (Event) o;
-        return id == event.id;
-    }
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(id);
-    }
 }
