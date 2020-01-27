@@ -4,7 +4,7 @@
 
 <body class="container">
 
-<h1>All Events</h1>
+<h1 th:text="${title}">All Events</h1>
 
 <P th:unless="${events} and ${events.size()}">No events! Try to create one.</P>
 

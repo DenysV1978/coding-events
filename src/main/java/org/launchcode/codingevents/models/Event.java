@@ -4,7 +4,7 @@ import javax.persistence.*;
 import javax.validation.constraints.*;
 import java.util.Objects;
 
-@Entity
+@Entity //this creates table in MySQL
 public class Event extends AbstractEntity {
 
 
@@ -34,7 +34,7 @@ public class Event extends AbstractEntity {
     @Min(1)
     public int quantityOfAttendees;
 
-    @ManyToOne
+    @ManyToOne // so, now Event knows about EventCategory. This creates relationship between Event and EventCategory; as I understand it creates foreign keys
     @NotNull(message="category is required")
     private EventCategory eventCategory;
 

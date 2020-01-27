@@ -6,6 +6,7 @@ import org.launchcode.codingevents.data.EventCategoryRepository;
 import org.launchcode.codingevents.data.EventRepository;
 import org.launchcode.codingevents.models.Event;
 
+import org.launchcode.codingevents.models.EventCategory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 /**
  * Created by Chris Bay
@@ -35,10 +37,23 @@ public class EventController {
 
 
     @GetMapping()
-    public String displayAllEvents(Model model) {
-
-        model.addAttribute("events", eventRepository.findAll()); //now we change how we get values using EventData!!!!! the thing is that this is a class that will never be instantiated
-        System.out.println("stop");
+    public String displayAllEvents(@RequestParam(required=false) Integer categoryId, Model model) { //@RequestParam will grab this categoryId from url line... (required=false) means this parameter is not required so if no parameter, controller still works...
+        //Integer categoryId is parameter that is created by query request at url created by hrefs!!
+        if(categoryId==null) {
+            model.addAttribute("title", "All Events");
+            model.addAttribute("events", eventRepository.findAll());
+        } else {
+            Optional<EventCategory> result =  eventCategoryRepository.findById(categoryId);
+           //the idea of this Optional is to return even something when there is nothing to return - this could create exception.
+            //however, having this Optional we have either empty or full object Optional
+           if(result.isEmpty()) {
+               model.addAttribute("title", "Invalid category ID: " + categoryId);
+           } else {
+               EventCategory category = result.get();
+               model.addAttribute("title", "Events in category: " + category.getName() );
+               model.addAttribute("events", category.getEvents());
+            }
+        }
         return "events/index";
     }
 
@@ -86,7 +101,7 @@ public class EventController {
 
     @PostMapping("delete") // this is the way to call this controller is when user hits Submit button
     public String processDeleteEventsForm(@RequestParam(required = false) int[] eventIds) { // looks like this required means that it is not required to have eventIds during running of this controller
-
+//eventsIds is array that was created by check boxes at Thymeleaf
        // System.out.println("Stop");
 
         if (eventIds != null) {
