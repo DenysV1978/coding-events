@@ -122,10 +122,10 @@ public class EventController {
 //
             return "events/create";
         }
-        //System.out.println("stop");
+        System.out.println("stop");
         Event temp = eventRepository.findById(eventId).get(); // this is a great example how to save in way to UPDATE save(entity)
-        temp.setName(newEvent.getName());
-        //System.out.println("stop");
+        temp.setName(newEvent.getName()); //HERE YOU DEFINITELY SEE THAT OUR EDIT NETHOD DEALS ONLY WITH CHANGING OF NAME. IF YOU WANT TO CHANGE ALL OTHER FIELDS - USE SETTER AND CHANGE OTHER FIELDS IN TEMP ENTITY AND AFTER RESAVE IT USING ENTITY SAVE
+        System.out.println("stop");
 
         //eventRepository.deleteById(eventId);
         eventRepository.save(temp);

@@ -47,7 +47,9 @@
                 <option th:each="eventCategory : ${categories}"
                         th:value="${eventCategory.id}"
                         th:text="${eventCategory.name}">
-<!--                        th:value is what will be submitted to the server and th:text is what will be shown to a user-->
+<!--                    this is very important to understand that these two classes are connected-->
+<!--                    through id; so id is the thing that specifies which category to use-->
+<!--                        th:value is what will be submitted to the server and th:text or th:field is what will be shown to a user-->
 
 
                 </option>
