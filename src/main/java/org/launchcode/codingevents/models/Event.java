@@ -1,8 +1,6 @@
 package org.launchcode.codingevents.models;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 import javax.validation.constraints.*;
 import java.util.Objects;
 
@@ -36,14 +34,16 @@ public class Event extends AbstractEntity {
     @Min(1)
     public int quantityOfAttendees;
 
-    private EventType type;
+    @ManyToOne
+    @NotNull(message="category is required")
+    private EventCategory eventCategory;
 
 //    public Event(String name) {
 //        this.name = name;
 //    } now we delete this constructor because we do not need to have it. however, maybe we want to use it... however,
     // using overwriting method Java will use only that constructor that has enough parameters
 
-    public Event(String name, String description, String contactEmail, int quantityOfAttendees, boolean mustRegister, EventType type) {
+    public Event(String name, String description, String contactEmail, int quantityOfAttendees, boolean mustRegister, EventCategory eventCategory) {
         //this(); // this guy will call itself (constructor) that does not have any arguments - basically it will create id and change
         //nextId plus one in the main class (basically it will change nextId which is shared by all instances of this class cause its static  property
 
@@ -52,7 +52,7 @@ public class Event extends AbstractEntity {
         this.contactEmail = contactEmail;
         this.quantityOfAttendees = quantityOfAttendees;
         this.mustRegister = mustRegister;
-        this.type = type;
+        this.eventCategory = eventCategory;
         this.location = location;
 
     }
@@ -113,12 +113,12 @@ public class Event extends AbstractEntity {
         this.quantityOfAttendees = quantityOfAttendees;
     }
 
-    public EventType getType() {
-        return type;
+    public EventCategory getEventCategory() {
+        return eventCategory;
     }
 
-    public void setType(EventType type) {
-        this.type = type;
+    public void setEventCategory(EventCategory eventCategory) {
+        this.eventCategory = eventCategory;
     }
 
     @Override

@@ -42,16 +42,17 @@
         <p class="error" th:errors="${event.mustRegister}"></p>
     </div>
     <div class="form-group">
-        <label>Type
-            <select th:field="${event.type}">
-                <option th:each="type : ${types}"
-                        th:value="${type}"
-                        th:text="${type.name}">
+        <label>Category
+            <select th:field="${event.eventCategory}">
+                <option th:each="eventCategory : ${categories}"
+                        th:value="${eventCategory.id}"
+                        th:text="${eventCategory.name}">
 <!--                        th:value is what will be submitted to the server and th:text is what will be shown to a user-->
 
 
                 </option>
             </select>
+            <p class="error" th:errors="${event.eventCategory}"></p>
         </label>
 
     </div>

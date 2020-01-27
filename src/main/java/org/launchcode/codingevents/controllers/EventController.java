@@ -2,9 +2,10 @@ package org.launchcode.codingevents.controllers;
 
 
 import org.hibernate.Session;
+import org.launchcode.codingevents.data.EventCategoryRepository;
 import org.launchcode.codingevents.data.EventRepository;
 import org.launchcode.codingevents.models.Event;
-import org.launchcode.codingevents.models.EventType;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -26,6 +27,9 @@ public class EventController {
     private EventRepository eventRepository;
     // this means that Spring will have to fulfill this class for us. It will be automonitored
 
+    @Autowired
+    private EventCategoryRepository eventCategoryRepository;
+
 
     //private static List<Event> events = new ArrayList<>(); now we remove this after we created EventData because now we gonna store all events in EventData
 
@@ -44,7 +48,7 @@ public class EventController {
         model.addAttribute("title", "Create event");
         model.addAttribute("event", new Event()); // we could do model.addAttribute(new Event()); - in this case TH
         //would create label "event"
-        model.addAttribute("types", EventType.values());
+        model.addAttribute("categories", eventCategoryRepository.findAll());
         return "events/create";
 
     }
@@ -55,7 +59,7 @@ public class EventController {
         //creating new Event newEvent and create this newEvent and after push it in EventData list. Do not forget that variables in html in this case should have the same names as variables in Event class
         if(errors.hasErrors()) {
             model.addAttribute("title", "Create Event");
-            model.addAttribute("types", EventType.values());
+            model.addAttribute("categories", eventCategoryRepository.findAll());
 //
             return "events/create";
         }
@@ -114,7 +118,7 @@ public class EventController {
     public String processEditForm(@ModelAttribute @Valid Event newEvent, Errors errors, Model model, int eventId) {
         if(errors.hasErrors()) {
             model.addAttribute("title", "Create Event");
-            model.addAttribute("type", EventType.values());
+            model.addAttribute("categories", eventCategoryRepository.findAll());
 //
             return "events/create";
         }
