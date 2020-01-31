@@ -7,6 +7,7 @@ import org.launchcode.codingevents.data.EventRepository;
 import org.launchcode.codingevents.models.Event;
 
 import org.launchcode.codingevents.models.EventCategory;
+import org.launchcode.codingevents.models.EventDetails;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -32,16 +33,20 @@ public class EventController {
     @Autowired
     private EventCategoryRepository eventCategoryRepository;
 
+//    @Autowired
+    private EventDetails eventDetails;
+
 
     //private static List<Event> events = new ArrayList<>(); now we remove this after we created EventData because now we gonna store all events in EventData
 
 
     @GetMapping()
     public String displayAllEvents(@RequestParam(required=false) Integer categoryId, Model model) { //@RequestParam will grab this categoryId from url line... (required=false) means this parameter is not required so if no parameter, controller still works...
-        //Integer categoryId is parameter that is created by query request at url created by hrefs!!
+        //Integer categoryId is parameter that is created by query request at url created by href_s!!
         if(categoryId==null) {
             model.addAttribute("title", "All Events");
             model.addAttribute("events", eventRepository.findAll());
+
         } else {
             Optional<EventCategory> result =  eventCategoryRepository.findById(categoryId);
            //the idea of this Optional is to return even something when there is nothing to return - this could create exception.

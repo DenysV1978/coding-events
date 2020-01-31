@@ -25,8 +25,8 @@
             <td th:text="${event.id}"></td>
             <td th:text="${event.name}"></td> <!-- this notation .name will ignite the getter for the name - implicitly. It is called
             syntactic sugar - easy to use. By the way our name is private; so, getter will be ignited-->
-            <td th:text="${event.description}"></td>
-            <td th:text="${event.contactEmail}"></td>
+            <td th:text="${event.eventDetails.description}"></td>
+            <td th:text="${event.eventDetails.contactEmail}"></td>
             <td th:text="${event.location}"></td>
             <td th:text="${event.mustRegister}"></td>
             <td th:text="${event.quantityOfAttendees}"></td>

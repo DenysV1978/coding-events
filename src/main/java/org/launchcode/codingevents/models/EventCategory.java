@@ -14,7 +14,7 @@ import java.util.Objects;
 public class EventCategory extends AbstractEntity {
 
 
-    @OneToMany(mappedBy = "eventCategory") //this is persistance annotation...so, here we say that one category can have many Events and they should be connected (mapped) through eventCategory field that is located in event
+    @OneToMany(mappedBy = "eventCategory") //this is persistence annotation...so, here we say that one category can have many Events and they should be connected (mapped) through eventCategory field that is located in event
     private final List<Event> events = new ArrayList<>();
 
     //the main idea to create this opposite way relationship was to be able to group Events by Categories. So, now EventCategories know about Events and those Events are stored depends on their categories in Lists
